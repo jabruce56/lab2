@@ -1,4 +1,25 @@
+#include <stdio.h>
+typedef unsigned short u16;
 typedef unsigned int u32;
+int BASE = 10;
+char *table = "0123456789ABCDEF";
+int rpu(u32 x)
+{
+  char c;
+  if (x){
+     c = table[x % BASE];
+     rpu(x / BASE);
+     putchar(c);
+  }
+}
+int printu(u32 x)
+{
+  if (x==0)
+     putchar('0');
+  else
+     rpu(x);
+  putchar(' ');
+}
 void prints(char *s)
 {
   int i=0;
@@ -46,9 +67,67 @@ int printx(u32 x)//print hex
       printd(x%16);
   }
 }
+int myprintf(char *fmt, ...)
+{
+  char *cp = fmt;
+  u16 *ip = (u16 *)&fmt + 1;//points to first variable
+  u32 *up;
+  while(*cp)
+  {
+    if(*cp!='%')
+    {
+      putchar(*cp);
+      if (*cp=='\n')
+        putchar('\r');
+      cp++; continue;
+    }
+    //printf("%d", *ip);
+    cp++;
+    switch(*cp)
+    {
+      case 'c':
+      {
+        putchar(*ip);
+        break;
+      }
+      case 's':
+      {
+        prints(*ip);
+        break;
+      }
+      case 'u':
+      {
+        printu(*ip);
+        break;
+      }
+      case 'd':
+      {
+        printd(*ip);
+        break;
+      }
+      case 'o':
+      {
+        printo(*(u32 *)(ip++));
+        break;
+      }
+      case 'x':
+      {
+        printx(*(u32 *)(ip++));
+        break;
+      }
+    }
+    cp++;
+    ip++;
+    }
+  }
+
 main ()
 {
-  printx(123);
+  char *a = "and";
+  char c = 'x';
+  //int b = 4;
+  myprintf("stuff %c", c);
+  //printx(123);
   //char *s = "hello";
   //prints(s);
 

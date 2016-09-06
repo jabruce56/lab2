@@ -27,6 +27,15 @@ void prints(char *s)
   while(i<strlen(s))
     putchar(s[i++]);
 }
+int rpd(int x)
+{
+  char c;
+  if(x/10){
+    c = table[x % 10];
+    rpd(x/10);
+    putchar(c);
+  }
+}
 int printd(int x)//print signed integer
 {
   if(x<0)
@@ -38,11 +47,13 @@ int printd(int x)//print signed integer
     putchar('0');
   else
   {
-    if(x/10)
-      printd(x/10);
-    putchar(x%10 + '0');
+      rpd(x);
   }
   //return x;
+}
+int rpo(u32 x)
+{
+
 }
 int printo(u32 x)//print octal
 {
@@ -53,6 +64,10 @@ int printo(u32 x)//print octal
   }
   //return x;
 }
+int rpx(u32 x)
+{
+
+}
 int printx(u32 x)//print hex
 {
   if(x!=0)
@@ -61,7 +76,7 @@ int printx(u32 x)//print hex
     if((x%16)>9)
       putchar((x%16)+55);
     else
-      printd(x%16);
+      rpd(x%16);
   }
 }
 int myprintf(char *fmt, ...)
@@ -98,7 +113,6 @@ int myprintf(char *fmt, ...)
     ip++;
     }
   }
-
 main ()
 {
   char *a = "and";
@@ -110,15 +124,16 @@ main ()
   //   putchar('\n');
   // }
 
-  myprintf("stuff %d t %c g %c", 56, 'p', 'Z');
+  //myprintf("stuff %d t %c g %c", 56, 'p', 'Z');
   //printx(123);
   //char *s = "hello";
   //prints(s);
 
 
-  //printd(4);
-  //printd(4);
-  //printd(0);
-  //printd(1);
+  printd(4);
+  printd(4);
+  printd(0);
+  printd(1);
+  printd(732);
   //printo(2305);
 }

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 typedef unsigned short u16;
 typedef unsigned int u32;
 int BASE = 10;
@@ -34,18 +35,14 @@ int printd(int x)//print signed integer
       putchar('-');
   }
   if(x==0)
-  {
     putchar('0');
-  }
   else
   {
     if(x/10)
-  {
-    printd(x/10);
+      printd(x/10);
+    putchar(x%10 + '0');
   }
-  putchar(x%10 + '0');
-  }
-  return x;
+  //return x;
 }
 int printo(u32 x)//print octal
 {
@@ -81,40 +78,21 @@ int myprintf(char *fmt, ...)
         putchar('\r');
       cp++; continue;
     }
-    //printf("%d", *ip);
     cp++;
     switch(*cp)
     {
       case 'c':
-      {
-        putchar(*ip);
-        break;
-      }
+        putchar(*ip); break;
       case 's':
-      {
-        prints(*ip);
-        break;
-      }
+        prints(*ip); break;
       case 'u':
-      {
-        printu(*ip);
-        break;
-      }
+        printu(*ip); break;
       case 'd':
-      {
-        printd(*ip);
-        break;
-      }
+        printd(*ip); break;
       case 'o':
-      {
-        printo(*(u32 *)(ip++));
-        break;
-      }
+        printo(*(u32 *)(ip++)); break;
       case 'x':
-      {
-        printx(*(u32 *)(ip++));
-        break;
-      }
+        printx(*(u32 *)(ip++)); break;
     }
     cp++;
     ip++;
@@ -125,8 +103,14 @@ main ()
 {
   char *a = "and";
   char c = 'x';
-  //int b = 4;
-  myprintf("stuff %c", c);
+  int b, i = 321;
+  // for (i=0;i<300;i++)
+  // {
+  //   printd(rand()%100);
+  //   putchar('\n');
+  // }
+
+  myprintf("stuff %d t %c g %c", 56, 'p', 'Z');
   //printx(123);
   //char *s = "hello";
   //prints(s);

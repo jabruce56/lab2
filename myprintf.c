@@ -1,5 +1,4 @@
 #include <string.h>
-#include <stdlib.h>
 typedef unsigned short u16;
 typedef unsigned int u32;
 int BASE = 10;
@@ -96,22 +95,3 @@ int myprintf(char *fmt, ...){
     ip++;
     }
   }
-int testmyprintf(){
-  char *a = "and";
-  char c = 'x';
-  int b = 321;
-  myprintf("\n----test----\n");
-  myprintf("----test----\n");
-  myprintf("----test----\n\n");
-  myprintf("stuff %c and %d\n", c, b);
-  myprintf("this is a string\n");
-  myprintf("this is %c hi %d test %x\n", 'A', 1234, 100);
-  myprintf("this is a test\n");
-  myprintf("testing a=%d b=%x c=%c s=%s\n", 123, 123, 'a', "testing");
-  myprintf("string=%s, a=%d  b=%u  c=%o  d=%x\n", "testing string", -1024, 1024, 1024, 1024);
-  myprintf("mymain() return to main() in assembly\n");
-  myprintf("hex=%x oct=%o char=%c int=%d string=%s unsigned=%u\n", 1024, 1024, 'v', 1024, "tessstt", 1024);
-}
-main (){
-  testmyprintf();
-}

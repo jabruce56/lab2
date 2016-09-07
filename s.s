@@ -12,6 +12,11 @@ main:
 #  Draw a diagram to see where are argc, argv, env?
 #--------------------------------------------------------------------
 
+    pushl 16(%ebp)
+    pushl 12(%ebp)
+    pushl 8(%ebp)
+    call mymain
+
 # (4). Return to caller
     movl  %ebp, %esp
 	  popl  %ebp
